@@ -1,0 +1,55 @@
+﻿using UnityEngine;
+using System.Collections;
+
+public class CanAttack : AbstractState
+{
+    public float _attackDuration = 0.5f;
+    public string _damageTag = "Hazard";
+    public string _cooldownName = "AutoAttack";
+
+    protected HaveMovements movement;
+    protected HaveAnimations anim;
+    protected HaveCollisions collision;
+    protected IInputManager input;
+    protected HaveCooldowns cooldown;
+
+    public override void SetupState()
+    {
+        input = GetComponent<CanMove>().Input;
+        cooldown.Add(_cooldownName, 1f);
+    }
+
+    public override void StateEnter()
+    {
+        anim.Play(HaveAnimations.Animations.attack, movement.LookDirection);
+        cooldown.Cooldowns[_cooldownName].Restart();
+    }
+
+    public override void StateUpdate()
+    {
+        Transform[] hits = collision.ConeCastAll(transform.position, movement.LookDirection, 2f, 90f, _hittableLayer);
+        foreach (Transform hit in hits) 
+        {
+            HaveCollisions otherCollisionManager = hit.transform.GetComponent<HaveCollisions>();
+            if (otherCollisionManager != null)
+            {
+                otherCollisionManager.ForceCollision(transform, _damageTag);
+            }
+        }
+    }
+
+    public override void SetupTransitions()
+    {
+        CanMove movingState = GetComponent<CanMove>();
+        Transit(movingState, _attackDuration);
+        TransitFromOtherState(movingState, AttackInput);
+        
+    }
+
+    protected virtual bool AttackInput()
+    {
+        return (input[1] && cooldown[_cooldownName].IsReady);
+    }
+
+
+}
