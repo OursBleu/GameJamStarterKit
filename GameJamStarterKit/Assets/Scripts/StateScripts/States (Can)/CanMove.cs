@@ -27,10 +27,14 @@ public class CanMove : AbstractState
         movement.Move(_inputDirection);
     }
 
+    public override void StateExit()
+    {
+        anim.Play(HaveAnimations.Animations.idle, movement.LookDirection);
+    }
+
     public override void SetupTransitions()
     {
-        // GET BUMPED AFTER BEING HURT
-
+        Transit(state.BaseState, () => { return !IsMoving(); });
         TransitFromOtherState(state.BaseState, IsMoving);
     }
 

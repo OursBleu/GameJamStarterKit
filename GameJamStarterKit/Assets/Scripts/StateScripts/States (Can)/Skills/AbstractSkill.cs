@@ -100,9 +100,11 @@ public abstract class AbstractSkill : AbstractState
 
     public override void SetupTransitions()
     {
-        CanMove movingState = GetComponent<CanMove>();
-        Transit(movingState, _windup + _threat + _windown);
-        TransitFromOtherState(movingState, SkillKeyPressed);
+        Transit(state.BaseState, _windup + _threat + _windown);
+        TransitFromOtherState(state.BaseState, SkillKeyPressed);
+
+        CanMove moveState = GetComponent<CanMove>();
+        if (moveState) TransitFromOtherState(moveState, SkillKeyPressed);
     }
 
 #region Child_Zone_methods
