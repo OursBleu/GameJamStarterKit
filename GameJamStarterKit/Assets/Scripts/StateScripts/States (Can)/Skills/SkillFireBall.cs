@@ -29,7 +29,6 @@ public class SkillFireBall : AbstractSkill
             GetComponent<SpriteRenderer>().color = GetComponent<SpriteRenderer>().color.WithAlpha(1f);
             _invocation = Instantiate(_prefab, transform.position + movement.LookDirection.AsVector3(), movement.DirToRot(90)) as AbstractInvocation;
             _invocation.Launcher = this.transform;
-            _invocation.TeamIndex = this.collision.TeamIndex;
             _invocation.LifeTime = 5f;
         }
         else if (IsWindown && IsFirstFrame)

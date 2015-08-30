@@ -47,20 +47,18 @@ public abstract class AbstractSkill : AbstractState
 
 #region CollisionLayers
 
-    private string _damagingLayer;
-
-    private string _damageableLayer;
-    private int _damageableLayerBit;
-    protected string DamageableLayer
+    private string _targetLayer;
+    private int _targetLayerBit;
+    protected string TargetLayer
     {
         get 
         { 
-            return _damageableLayer;
+            return _targetLayer;
         }
         set 
         { 
-            _damageableLayer = value; 
-            _damageableLayerBit = 1 << LayerMask.NameToLayer(value); 
+            _targetLayer = value; 
+            _targetLayerBit = 1 << LayerMask.NameToLayer(value); 
         }
     }
 
@@ -74,8 +72,7 @@ public abstract class AbstractSkill : AbstractState
 
     public override void SetupState()
     {
-        _damagingLayer = "Hazard";
-        DamageableLayer = "Entity";
+        TargetLayer = "Entity";
         input = GetComponent(typeof(IInputManager)) as IInputManager;
     }
 
@@ -112,23 +109,22 @@ public abstract class AbstractSkill : AbstractState
 
     protected void Cone(Vector3 origin, Vector2 direction, float length, float angle)
     {
-        Transform[] hits = ConeCastAll(origin, movement.LookDirection, length, angle, _damageableLayerBit);
-        collision.ForceCollision(hits, _damagingLayer, origin);
-        
+        Transform[] hits = ConeCastAll(origin, movement.LookDirection, length, angle, _targetLayerBit);
+        HaveCollisions.SetCollisionInfos(transform, hits, origin);
     }
 
     protected void Circle(Vector3 origin, float radius)
     {
-        Transform[] hits = GetAllTransforms(Physics2D.OverlapCircleAll(origin, radius, _damageableLayerBit));
-        collision.ForceCollision(hits, _damagingLayer, origin);
+        Transform[] hits = GetAllTransforms(Physics2D.OverlapCircleAll(origin, radius, _targetLayerBit));
+        HaveCollisions.SetCollisionInfos(transform, hits, origin);
     }
 
     protected void Square(Vector3 origin, Vector2 direction, float length, float width)
     {
         Vector2 start = origin + Quaternion.Euler(0, 0, -90)*direction*(width/2);
         Vector2 end = origin + new Vector3(direction.x, direction.y, 0f)*length + Quaternion.Euler(0, 0, 90)*direction*(width/2);
-        Transform[] hits = GetAllTransforms(Physics2D.OverlapAreaAll(start, end, _damageableLayerBit));
-        collision.ForceCollision(hits, _damagingLayer, origin);
+        Transform[] hits = GetAllTransforms(Physics2D.OverlapAreaAll(start, end, _targetLayerBit));
+        HaveCollisions.SetCollisionInfos(transform, hits, origin);
     }
 
 #endregion

@@ -33,6 +33,16 @@ public class CanBeHurt : AbstractState
 
     bool CollisionWithHazard()
     {
-        return (collision.IsColliding && _damagingLayer == collision.Layer);
+        return (CollisionWithSkill() || CollisionWithWall());
+    }
+
+    bool CollisionWithSkill()
+    {
+        return (collision.IsColliding && collision.IsOtherInDifferentTeam && !collision.IsOtherOwnCollider);
+    }
+
+    bool CollisionWithWall()
+    {
+        return (collision.IsColliding && collision.IsOtherOwnCollider && collision.Other.gameObject.layer == LayerMask.NameToLayer(_damagingLayer));
     }
 }

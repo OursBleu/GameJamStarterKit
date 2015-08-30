@@ -5,20 +5,35 @@ using System.Collections.Generic;
 
 public class HaveCollisions : AbstractManager
 {
+    #region Attributes_and_Properties
+
     [SerializeField] int _teamIndex = -1;
     public int TeamIndex { get { return _teamIndex; } set { _teamIndex = value; } }
 
     bool _isColliding = false;
     public bool IsColliding { get { return _isColliding; } }
 
+    Vector2 _impact = Vector3.forward;
+    public Vector2 Impact { get { return _impact; } }
+
     Transform _other = null;
     public Transform Other { get { return _other; } }
 
-    string _layer = "";
-    public string Layer { get { return _layer; } }
+    bool _isOtherOwnCollider = true;
+    public bool IsOtherOwnCollider { get { return _isOtherOwnCollider; } }
+    
+    public bool IsOtherInDifferentTeam 
+    { 
+        get 
+        {
+            if (_other == null) return false;
+            HaveCollisions otherCollisionManager = _other.GetComponent<HaveCollisions>();
+            if (!otherCollisionManager) return false;
+            return (otherCollisionManager.TeamIndex != this.TeamIndex); 
+        }
+    }
 
-    Vector2 _impact = Vector3.forward;
-    public Vector2 Impact { get { return _impact; } }
+    #endregion
 
     public Vector2 NullPosition { get { return Vector2.zero; } }
 
@@ -26,46 +41,49 @@ public class HaveCollisions : AbstractManager
     {
         _isColliding = true;
         _other = other.transform;
-        _layer = LayerMask.LayerToName(other.layer);
+        _isOtherOwnCollider = true;
         _impact = NullPosition;
     }
 
-    void EndCollision()
+    public void EndCollision()
     {
         _isColliding = false;
         _other = null;
-        _layer = "";
+        _isOtherOwnCollider = true;
         _impact = NullPosition;
     }
 
-    public bool ForceCollision(Transform target, string layer, Vector3 impactInfos, bool directionOrPosition = false)
+    public static bool SetCollisionInfos(Transform source, Transform target, Vector3 impactInfos, bool directionOrPosition = false)
     {
         // FIRST, CHECK IF THE TARGET GAMEOBJECT CAN HANDLE COLLISIONS
 
-        HaveCollisions otherCollisionManager = target.GetComponent<HaveCollisions>();
-        if (otherCollisionManager == null || otherCollisionManager._teamIndex == this._teamIndex) return false;
+        HaveCollisions sourceCollisionManager = source.GetComponent<HaveCollisions>();
+        HaveCollisions targetCollisionManager = target.GetComponent<HaveCollisions>();
+        if (target == null || source == null) return false;
+        if (!targetCollisionManager) return false;
+        if (targetCollisionManager && sourceCollisionManager._teamIndex == targetCollisionManager._teamIndex) return false;
 
         // SET ALL THE TARGET COLLISION ATTRIBUTES TO REFERENCE THIS OBJECT
 
-        otherCollisionManager._isColliding = true;
-        otherCollisionManager._other = this.transform;
-        otherCollisionManager._layer = layer;
+        targetCollisionManager._isColliding = true;
+        targetCollisionManager._other = source;
+        targetCollisionManager._isOtherOwnCollider = false;
 
-        if (directionOrPosition) otherCollisionManager._impact = impactInfos;
-        else otherCollisionManager._impact = otherCollisionManager.transform.position - impactInfos;
+        if (directionOrPosition) targetCollisionManager._impact = impactInfos;
+        else targetCollisionManager._impact = target.position - impactInfos;
 
         // RESET ALL THE TARGET COLLISION ATTRIBUTES ONCE THE INFORMATIONS HAVE BEEN PROCESSED
 
-        otherCollisionManager.Invoke("EndCollision", 0.2f);
+        targetCollisionManager.Invoke("EndCollision", 0.2f);
 
         return true;
     }
 
-    public void ForceCollision(Transform[] targets, string layer, Vector3 impactPosition, bool PreviousParameterIsDirection = false)
+    public static void SetCollisionInfos(Transform source, Transform[] targets, Vector3 impactInfos, bool PreviousParameterIsDirection = false)
     {
         foreach (Transform target in targets)
         {
-            ForceCollision(target, layer, impactPosition, PreviousParameterIsDirection);
+            HaveCollisions.SetCollisionInfos(source, target, impactInfos, PreviousParameterIsDirection);
         }
     }
 

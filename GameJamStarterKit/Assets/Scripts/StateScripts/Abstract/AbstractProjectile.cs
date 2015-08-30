@@ -29,11 +29,10 @@ public class AbstractProjectile : AbstractInvocation {
         base.Update();
 
         movement.Move(transform.right);
-        if (collision.IsColliding)
-        {
-            if (!collision.ForceCollision(collision.Other.transform, "Hazard", transform.right, true)) return;
-            //anim.PlayInVoid("Explosion");
-            Destroy(gameObject);
-        }
 	}
+
+    void OnTriggerEnter2D(Collider2D other)
+    {
+        if (HaveCollisions.SetCollisionInfos(Launcher, other.transform, transform.right, true)) Destroy(gameObject);
+    }
 }

@@ -33,6 +33,14 @@ public class HaveHUD : MonoBehaviour {
                 str.text += pair.Key + " : " + pair.Value.Remaining.ToString("F1") + "\n";
             }
         }
+
+        HaveCollisions collision = GetComponent<HaveCollisions>();
+        if (collision)
+        {
+            str.text += "TeamIndex : " + collision.TeamIndex + "\n";
+            str.text += "Other : " + (collision.Other != null ? collision.Other.gameObject.name : "/") + "\n";
+            str.text += "ForcedCollision : " + collision.IsOtherOwnCollider + "\n";
+        }
 	}
 
     void OnGui()
