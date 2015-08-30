@@ -29,8 +29,7 @@ public class CanBeInvincible : AbstractState
         if(bumpState) TransitFromOtherState(bumpState, bumpState._duration);
         else if (hurtState) TransitFromOtherState(hurtState);
 
-        CanMove movingState = GetComponent<CanMove>();
-        Transit(movingState, _duration);
+        Transit(state.BaseState, _duration);
     }
 
     IEnumerator Blink(float duration, float rate)

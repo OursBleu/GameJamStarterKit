@@ -8,13 +8,13 @@ public abstract class AbstractSkill : AbstractState
 #region SkillInfos
 
     private string _name;
-    private int _key;
+    private int _inputKey;
     private float _cd;
 
     protected void SetInfos(string name, int key)
     {
         _name = name;
-        _key = key;
+        _inputKey = key;
         if (float.IsNaN(_cd) && !cooldown._cooldowns.ContainsKey(_name)) cooldown.Add(_name, _cd);
     }
 
@@ -137,7 +137,7 @@ public abstract class AbstractSkill : AbstractState
 
     bool SkillKeyPressed()
     {
-        return (input[_key] && cooldown[_name].IsReady);
+        return (input[_inputKey] && cooldown[_name].IsReady);
     }
 
     Transform[] GetAllTransforms(RaycastHit2D[] hits)

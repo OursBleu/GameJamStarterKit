@@ -4,8 +4,8 @@ using System.Collections;
 
 public class StatesManager : AbstractManager {
 
-    AbstractState _mainState;
-    public AbstractState MainState { get { return _mainState; } }
+    AbstractState _baseState;
+    public AbstractState BaseState { get { return _baseState; } }
 
     AbstractState _currentState;
     public AbstractState CurrentState { get { return _currentState; } }
@@ -24,9 +24,8 @@ public class StatesManager : AbstractManager {
 
     void ChooseFirstState()
     {
-        _mainState = GetComponent<AbstractState>();
-        _currentState = _mainState;
-        _currentState.StateEnter();
+        _baseState = gameObject.GetOrAdd<CanIdle>();
+        _currentState = _baseState;
     }
 
     void SetupStates()

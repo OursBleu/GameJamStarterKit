@@ -5,19 +5,19 @@ using System.Collections.Generic;
 public class HaveInputs : AbstractManager, IInputManager 
 {
 
-    public int _playerIndex = 1;
-    public string _horizontalAxis = "Horizontal";
-    public string _verticalAxis = "Vertical";
-    public string _skillPrefix = "Fire";
-
-    public ControlMode _mode = ControlMode.keyboard;
-    public enum ControlMode { keyboard, mouse, game_controller }
+    [SerializeField] int _playerIndex = 1;
+    [SerializeField] ControlMode _mode = ControlMode.mouse;
+    enum ControlMode { keyboard, mouse, game_controller }
     Dictionary<ControlMode, string> ControlModeToString = new Dictionary<ControlMode, string> 
     { 
         { ControlMode.keyboard, "K" },
         { ControlMode.mouse, "Mouse" },
         { ControlMode.game_controller, "C" }
     };
+
+    string _horizontalAxis = "Horizontal";
+    string _verticalAxis = "Vertical";
+    string _skillPrefix = "Fire";
 
     public Vector2 Direction
     {
