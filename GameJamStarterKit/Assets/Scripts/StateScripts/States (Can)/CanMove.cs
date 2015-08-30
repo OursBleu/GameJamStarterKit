@@ -9,13 +9,10 @@ public class CanMove : AbstractState
     protected HaveMovements movement;
     protected HaveAnimations anim;
     protected IInputManager input;
-    //public IInputManager Input { get { return input; } }
 
     public override void SetupState()
     {
-        //input = RequireSwitch(_isPlayer, typeof(HaveInputs), typeof(HaveIA)) as IInputManager;
         input = GetComponent<IInputManager>();
-        if (input == null) input = gameObject.AddComponent<HaveInputs>();
     }
 
     public override void StateUpdate()
@@ -28,5 +25,17 @@ public class CanMove : AbstractState
         _inputDirection = input.Direction;
 
         movement.Move(_inputDirection);
+    }
+
+    public override void SetupTransitions()
+    {
+        // GET BUMPED AFTER BEING HURT
+
+        TransitFromOtherState(state.BaseState, IsMoving);
+    }
+
+    bool IsMoving()
+    {
+        return (input.Direction != Vector2.zero);
     }
 }

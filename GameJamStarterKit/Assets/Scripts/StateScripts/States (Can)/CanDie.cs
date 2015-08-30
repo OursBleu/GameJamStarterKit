@@ -25,15 +25,14 @@ public class CanDie : AbstractState
 
     public override void SetupTransitions()
     {
-        CanMove movingState = GetComponent<CanMove>();
-        TransitFromOtherState(movingState, NoHealthLeft);
+        TransitFromOtherState(state.BaseState, NoHealthLeft);
 
         CanBeBumped bumpState = GetComponent<CanBeBumped>();
         CanBeInvincible invisState = GetComponent<CanBeInvincible>();
         if (bumpState) TransitFromOtherState(bumpState, bumpState._duration, NoHealthLeft);
         else if (invisState) TransitFromOtherState(invisState, NoHealthLeft);
 
-        Transit(movingState, LifeRestored);
+        Transit(state.BaseState, LifeRestored);
     }
 
     public bool LifeRestored()

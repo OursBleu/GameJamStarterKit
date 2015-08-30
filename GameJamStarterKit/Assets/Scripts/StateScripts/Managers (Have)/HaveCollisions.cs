@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 
@@ -37,17 +38,26 @@ public class HaveCollisions : AbstractManager
         _impact = NullPosition;
     }
 
-    public bool ForceCollision(Transform target, string layer, Vector3 impactPosition, bool PreviousParameterIsDirection = false)
+    public bool ForceCollision(Transform target, string layer, Vector3 impactInfos, bool directionOrPosition = false)
     {
+        // FIRST, CHECK IF THE TARGET GAMEOBJECT CAN HANDLE COLLISIONS
+
         HaveCollisions otherCollisionManager = target.GetComponent<HaveCollisions>();
         if (otherCollisionManager == null || otherCollisionManager._teamIndex == this._teamIndex) return false;
 
+        // SET ALL THE TARGET COLLISION ATTRIBUTES TO REFERENCE THIS OBJECT
+
         otherCollisionManager._isColliding = true;
         otherCollisionManager._other = this.transform;
-        otherCollisionManager._impact = (PreviousParameterIsDirection ? impactPosition : (otherCollisionManager.transform.position - impactPosition));
         otherCollisionManager._layer = layer;
 
+        if (directionOrPosition) otherCollisionManager._impact = impactInfos;
+        else otherCollisionManager._impact = otherCollisionManager.transform.position - impactInfos;
+
+        // RESET ALL THE TARGET COLLISION ATTRIBUTES ONCE THE INFORMATIONS HAVE BEEN PROCESSED
+
         otherCollisionManager.Invoke("EndCollision", 0.2f);
+
         return true;
     }
 

@@ -4,6 +4,7 @@ using System.Collections.Generic;
 
 public class SkillFireBall : AbstractSkill
 {
+    public int _key;
     public AbstractInvocation _prefab;
     AbstractInvocation _invocation;
 
@@ -11,7 +12,7 @@ public class SkillFireBall : AbstractSkill
     {
         base.SetupState();
 
-        SetInfos(name: "FireBall", key: 2);
+        SetInfos(name: "FireBall", key: _key);
         SetDelays(windup: 0.2f, threat: 0.1f, windown: 0.5f, cd: 0f);
     }
 

@@ -4,10 +4,10 @@ using System.Collections.Generic;
 
 public class HaveAnimations : AnimationHandler
 {
-    private string _folderName;
+    [SerializeField] string _folderName;
     public string FolderName { get { return _folderName; } set { _folderName = value; _path = _folderName + "/" + _spriteName; } }
 
-    private string _spriteName;
+    [SerializeField] string _spriteName;
     public string SpriteName { get { return _spriteName; } set { _spriteName = value; _path = _folderName + "/" + _spriteName; } }
 
     private string _path = "SpriteSheets/Goblin";

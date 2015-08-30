@@ -4,11 +4,13 @@ using System.Collections.Generic;
 
 public class SkillSword : AbstractSkill
 {
+    public int _key;
+
     public override void SetupState()
     {
         base.SetupState();
 
-        SetInfos(name: "Sword", key: 1);
+        SetInfos(name: "Sword", key: _key);
         SetDelays(windup: 0.1f, threat: 0.4f, windown: 0.4f, cd: 0f);
     }
 

@@ -22,6 +22,11 @@ public class CanBeHurt : AbstractState
 
     public override void SetupTransitions()
     {
+        TransitFromOtherState(state.BaseState, CollisionWithHazard);
+
+        AbstractSkill[] skills = GetComponents<AbstractSkill>();
+        foreach (AbstractSkill skill in skills) TransitFromOtherState(skill, CollisionWithHazard);
+
         CanMove movingState = GetComponent<CanMove>();
         TransitFromOtherState(movingState, CollisionWithHazard);
     }
