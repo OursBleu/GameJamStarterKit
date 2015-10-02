@@ -14,6 +14,26 @@ public static class Extensions
         return new Vector3(v.x, v.y, 0f);
     }
 
+    public static Vector3 x(this Vector3 v)
+    {
+        return new Vector3(v.x, 0f, 0f);
+    }
+
+    public static Vector3 xy(this Vector3 v)
+    {
+        return new Vector3(v.x, v.y, 0f);
+    }
+
+    public static Vector3 xz(this Vector3 v)
+    {
+        return new Vector3(v.x, 0f, v.z);
+    }
+
+    public static Vector3 yz(this Vector3 v)
+    {
+        return new Vector3(0f, v.y, v.z);
+    }
+
     public static T GetOrAdd<T>(this GameObject gameObject) where T : Component
     {
         return gameObject.GetComponent<T>() ?? gameObject.AddComponent<T>();

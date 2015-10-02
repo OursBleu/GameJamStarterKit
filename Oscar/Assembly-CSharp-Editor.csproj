@@ -5,7 +5,7 @@
 	<Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
 	<ProductVersion>10.0.20506</ProductVersion>
 	<SchemaVersion>2.0</SchemaVersion>
-	<ProjectGuid>{D0F69939-1C12-FB59-06F0-B45766A7279A}</ProjectGuid>
+	<ProjectGuid>{DB7A8D65-AAB7-186F-7D4F-757CD8498735}</ProjectGuid>
 	<OutputType>Library</OutputType>
 	<AppDesignerFolder>Properties</AppDesignerFolder>
 	<RootNamespace></RootNamespace>
@@ -46,26 +46,48 @@
 	</Reference>
   </ItemGroup>
   <ItemGroup>
-     <Compile Include="Assets\Tiled2Unity\Scripts\Editor\CustomTiledImporterAttribute.cs" />
-     <Compile Include="Assets\Tiled2Unity\Scripts\Editor\ICustomTiledImporter.cs" />
-     <Compile Include="Assets\Tiled2Unity\Scripts\Editor\ImportTiled2Unity.Material.cs" />
-     <Compile Include="Assets\Tiled2Unity\Scripts\Editor\ImportTiled2Unity.Mesh.cs" />
-     <Compile Include="Assets\Tiled2Unity\Scripts\Editor\ImportTiled2Unity.Texture.cs" />
-     <Compile Include="Assets\Tiled2Unity\Scripts\Editor\ImportTiled2Unity.Xml.cs" />
-     <Compile Include="Assets\Tiled2Unity\Scripts\Editor\ImportTiled2Unity.cs" />
-     <Compile Include="Assets\Tiled2Unity\Scripts\Editor\ImportUtils.cs" />
-     <Compile Include="Assets\Tiled2Unity\Scripts\Editor\SortingLayerExposedEditor.cs" />
-     <Compile Include="Assets\Tiled2Unity\Scripts\Editor\Tiled2UnityMenuItems.cs" />
-     <Compile Include="Assets\Tiled2Unity\Scripts\Editor\TiledAssetPostProcessor.cs" />
-     <None Include="Assets\Tiled2Unity\Prefabs\_ReadMe.txt" />
-     <None Include="Assets\Tiled2Unity\Shaders\shaTiledMap.shader" />
-     <None Include="Assets\Tiled2Unity\Tiled2Unity.export.txt" />
-     <None Include="Assets\Tiled2Unity\Materials\_ReadMe.txt" />
-     <None Include="Assets\Tiled2Unity\Textures\_ReadMe.txt" />
+     <Compile Include="Assets\Ferr\2D\Editor\Ferr2D_PathEditor.cs" />
+     <Compile Include="Assets\Ferr\2DTerrain\Editor\Ferr2DT_Builder.cs" />
+     <Compile Include="Assets\Ferr\2DTerrain\Editor\Ferr2DT_ComponentTracker.cs" />
+     <Compile Include="Assets\Ferr\2DTerrain\Editor\Ferr2DT_MaterialSelector.cs" />
+     <Compile Include="Assets\Ferr\2DTerrain\Editor\Ferr2DT_Menu.cs" />
+     <Compile Include="Assets\Ferr\2DTerrain\Editor\Ferr2DT_PathTerrainEditor.cs" />
+     <Compile Include="Assets\Ferr\2DTerrain\Editor\Ferr2DT_SceneOverlay.cs" />
+     <Compile Include="Assets\Ferr\2DTerrain\Editor\Ferr2DT_TerrainMaterialEditor.cs" />
+     <Compile Include="Assets\Ferr\2DTerrain\Editor\Ferr2DT_TerrainMaterialWindow.cs" />
+     <Compile Include="Assets\Ferr\Common\Editor\ComponentTracker.cs" />
+     <Compile Include="Assets\Ferr\Common\Editor\Dummy.cs" />
+     <Compile Include="Assets\Ferr\Common\Editor\EditorTools.cs" />
+     <Compile Include="Assets\Ferr\Common\Editor\ProceduralMeshSaver.cs" />
+     <Compile Include="Assets\Ferr\Common\Editor\UnlitVertexColorEditor.cs" />
+     <None Include="Assets\Ferr\2DTerrain\Shaders\UnlitColoredTint.shader" />
+     <None Include="Assets\Ferr\Common\Data\cache.txt" />
+     <None Include="Assets\Ferr\2DTerrain\Shaders\UnitColoredTransparent.shader" />
+     <None Include="Assets\Ferr\Common\Shaders\UnlitVertexColorTransparent.shader" />
+     <None Include="Assets\Ferr\Docs\Ferr2DTerrainTool - Readme.txt" />
+     <None Include="Assets\Ferr\2DTerrain\Shaders\LitWavyTransparent.shader" />
+     <None Include="Assets\Ferr\Common\Shaders\UnlitSolidColor.shader" />
+     <None Include="Assets\Ferr\2DTerrain\Shaders\LitColored.shader" />
+     <None Include="Assets\Ferr\2DTerrain\Shaders\LitColoredTint.shader" />
+     <None Include="Assets\Ferr\2DTerrain\Shaders\UnlitColored.shader" />
+     <None Include="Assets\Ferr\2DTerrain\Shaders\Ferr2DTCommon.cginc" />
+     <None Include="Assets\Ferr\Common\Shaders\GizmoShader3D.shader" />
+     <None Include="Assets\Ferr\Common\Shaders\LitVertexColor.shader" />
+     <None Include="Assets\Ferr\2DTerrain\Shaders\LitColoredTintTransparent.shader" />
+     <None Include="Assets\Ferr\2DTerrain\Shaders\UnlitColoredTintTransparent.shader" />
+     <None Include="Assets\Elementals\!Readme.txt" />
+     <None Include="Assets\Ferr\2DTerrain\Shaders\LightmapColoredTransparent.shader" />
+     <None Include="Assets\Ferr\Common\Shaders\UnlitVertexColor.shader" />
+     <None Include="Assets\Ferr\Common\Shaders\GizmoShader2D.shader" />
+     <None Include="Assets\Ferr\2D\Scripts\poly2tri.cs\LICENSE.txt" />
+     <None Include="Assets\Ferr\Common\Shaders\UnlitVertexColorTex.shader" />
      <None Include="Assets\Materials\UnlitAlpha.shader" />
-     <None Include="Assets\Tiled2Unity\License.txt" />
-     <None Include="Assets\Tiled2Unity\Imported\_ReadMe.txt" />
-     <None Include="Assets\Tiled2Unity\Meshes\_ReadMe.txt" />
+     <None Include="Assets\Ferr\2DTerrain\Shaders\UnlitWavyTransparent.shader" />
+     <None Include="Assets\Ferr\2D\Scripts\poly2tri.cs\AUTHORS.txt" />
+     <None Include="Assets\Ferr\Common\Shaders\UnlitVertexColorTexTransparent.shader" />
+     <None Include="Assets\Ferr\Common\Shaders\ShadowOnly.shader" />
+     <None Include="Assets\Ferr\2DTerrain\Shaders\LightmapColored.shader" />
+     <None Include="Assets\Ferr\2DTerrain\Shaders\LitColoredTransparent.shader" />
  <Reference Include="UnityEngine.UI">
  <HintPath>C:/Program Files/Unity/Editor/Data/UnityExtensions/Unity/GUISystem/UnityEngine.UI.dll</HintPath>
  </Reference>
@@ -120,7 +142,7 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="Assembly-CSharp.csproj">
-      <Project>{F82DA9EC-BF64-622E-97E2-A3DA3B241DD0}</Project>      <Name>Assembly-CSharp</Name>    </ProjectReference>
+      <Project>{196D9C75-6BDB-BCCB-FBF2-4C59D3AF47A4}</Project>      <Name>Assembly-CSharp</Name>    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
