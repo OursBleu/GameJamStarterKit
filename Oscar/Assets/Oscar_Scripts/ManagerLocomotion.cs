@@ -19,7 +19,30 @@ public class ManagerLocomotion : Manager, IDisableable
     }
 
     private float _maxSpeed = 150f;
-    public float MaxSpeed { get { return _maxSpeed; } set { _maxSpeed = value; } }
+    public float MaxSpeed 
+    { 
+        get 
+        { 
+            return _maxSpeed; 
+        }
+        set 
+        { 
+            _maxSpeed = value; 
+        } 
+    }
+
+    public void Init(float speed)
+    {
+        MaxSpeed = speed;
+        DefaultSpeed = speed;
+    }
+
+    private float _jumpForce = 80f;
+    public float JumpForce
+    {
+        get { return _jumpForce; }
+        set { _jumpForce = value; }
+    }
 
     Vector2 _lastDirection = Vector2.zero;
     public Vector2 LastDirection { get { return _lastDirection; } set { _lastDirection = value; } }

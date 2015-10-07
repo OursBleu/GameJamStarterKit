@@ -20,7 +20,7 @@ public class FsmPlayer : Fsm
         _ground = gameObject.GetOrAdd<ManagerGroundProbe>();
 
         int moving = AddState(new StateMoving(this));
-        int jumping = AddState(new StateImpulse(this, Vector2.up, 80f));
+        int jumping = AddState(new StateJumping(this));
         int falling = AddState(new StateFalling(this));
         int hit = AddState(new StateHit(this));
         int dead = AddState(new StateDead(this));

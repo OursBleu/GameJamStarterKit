@@ -109,8 +109,10 @@
      <Compile Include="Assets\Ferr\Common\Scripts\SOUtil.cs" />
      <Compile Include="Assets\Julien\Oscar.cs" />
      <Compile Include="Assets\Julien\fireball.cs" />
+     <Compile Include="Assets\Oscar_Scripts\CharacterStarterKit\FsmToCopy.cs" />
      <Compile Include="Assets\Oscar_Scripts\Fsm.cs" />
      <Compile Include="Assets\Oscar_Scripts\FsmPlayer.cs" />
+     <Compile Include="Assets\Oscar_Scripts\FsmStandard.cs" />
      <Compile Include="Assets\Oscar_Scripts\GlobalManagerFrameAnimation.cs" />
      <Compile Include="Assets\Oscar_Scripts\GlobalManagerParticles.cs" />
      <Compile Include="Assets\Oscar_Scripts\Grid.cs" />
@@ -129,7 +131,7 @@
      <Compile Include="Assets\Oscar_Scripts\StateDead.cs" />
      <Compile Include="Assets\Oscar_Scripts\StateFalling.cs" />
      <Compile Include="Assets\Oscar_Scripts\StateHit.cs" />
-     <Compile Include="Assets\Oscar_Scripts\StateImpulse.cs" />
+     <Compile Include="Assets\Oscar_Scripts\StateJumping.cs" />
      <Compile Include="Assets\Oscar_Scripts\StateMeteor.cs" />
      <Compile Include="Assets\Oscar_Scripts\StateMoving.cs" />
      <Compile Include="Assets\Oscar_Scripts\StateProjectile.cs" />
