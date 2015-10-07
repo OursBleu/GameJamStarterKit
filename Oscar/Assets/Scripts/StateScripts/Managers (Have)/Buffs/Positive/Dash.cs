@@ -56,7 +56,7 @@ public class Dash : PositiveBuff
 
         if (_input) _input.IsEnabled = true;
 
-        Self.GetComponent<Rigidbody2D>().collisionDetectionMode = CollisionDetectionMode2D.None;
+        Self.GetComponent<Rigidbody2D>().collisionDetectionMode = CollisionDetectionMode2D.Discrete;
     }
     
 }
