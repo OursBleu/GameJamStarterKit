@@ -105,10 +105,10 @@
      <Compile Include="Assets\Ferr\Common\Scripts\LogoLock.cs" />
      <Compile Include="Assets\Ferr\Common\Scripts\RenderUtility.cs" />
      <Compile Include="Assets\Ferr\Common\Scripts\SOUtil.cs" />
-     <Compile Include="Assets\Scripts\EnemyStarterKit\FsmStandard.cs" />
      <Compile Include="Assets\Scripts\EnemyStarterKit\FsmToCopy.cs" />
      <Compile Include="Assets\Scripts\Librairie fsm\Abstract\Extensions.cs" />
      <Compile Include="Assets\Scripts\Librairie fsm\Abstract\Fsm.cs" />
+     <Compile Include="Assets\Scripts\Librairie fsm\Abstract\FsmStandard.cs" />
      <Compile Include="Assets\Scripts\Librairie fsm\Abstract\IDisableable.cs" />
      <Compile Include="Assets\Scripts\Librairie fsm\Abstract\IManagerInput.cs" />
      <Compile Include="Assets\Scripts\Librairie fsm\Abstract\Instantiable.cs" />
