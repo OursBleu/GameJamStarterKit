@@ -20,7 +20,7 @@ public class FsmStandard : Fsm
         _ground = gameObject.GetOrAdd<ManagerGroundProbe>();
         _health = gameObject.GetOrAdd<ManagerHealth>();
         _collision = gameObject.GetOrAdd<ManagerCollision>();
-        _input = gameObject.GetOrAdd<ManagerInputPlayer>();
+        //_input = gameObject.GetOrAdd<ManagerInputPlayer>();
         _locomotion = gameObject.GetOrAdd<ManagerLocomotion>();
 
         moving = AddState(new StateMoving(this));

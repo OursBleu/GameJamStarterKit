@@ -7,7 +7,7 @@ public class ManagerHealth : Manager
     private int _maxValue = 1;
     public int MaxValue { get { return _maxValue; } set { _maxValue = value; Value = _currentValue; } }
 
-    private int _currentValue;
+    public int _currentValue;
     public int Value
     {
         get { return _currentValue; }
