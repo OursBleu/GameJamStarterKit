@@ -162,6 +162,8 @@
     <Compile Include="Assets\Scripts\Oscar\ManagerInputPlayer.cs" />
     <Compile Include="Assets\Scripts\Oscar\StateMeteor.cs" />
     <Compile Include="Assets\Scripts\Oscar\StateProjectile.cs" />
+    <Compile Include="Assets\Scripts\Sangleau\FSM_Sangleau.cs" />
+    <Compile Include="Assets\Scripts\Sangleau\Manager_Sangleau.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\Ferr\2D\Scripts\poly2tri.cs\AUTHORS.txt" />
