@@ -61,6 +61,7 @@
      <Compile Include="Assets\Ferr\Common\Editor\ProceduralMeshSaver.cs" />
      <Compile Include="Assets\Ferr\Common\Editor\UnlitVertexColorEditor.cs" />
      <None Include="Assets\Ferr\2DTerrain\Shaders\UnlitColoredTint.shader" />
+     <None Include="Assets\Scripts\EnemyStarterKit\$ReadMe.txt" />
      <None Include="Assets\Ferr\Common\Data\cache.txt" />
      <None Include="Assets\Ferr\2DTerrain\Shaders\UnitColoredTransparent.shader" />
      <None Include="Assets\Ferr\Common\Shaders\UnlitVertexColorTransparent.shader" />

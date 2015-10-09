@@ -106,6 +106,8 @@
      <Compile Include="Assets\Ferr\Common\Scripts\RenderUtility.cs" />
      <Compile Include="Assets\Ferr\Common\Scripts\SOUtil.cs" />
      <Compile Include="Assets\Scripts\EnemyStarterKit\FsmToCopy.cs" />
+     <Compile Include="Assets\Scripts\EnemyStarterKit\ManagerInputToCopy.cs" />
+     <Compile Include="Assets\Scripts\EnemyStarterKit\StateToCopy.cs" />
      <Compile Include="Assets\Scripts\Librairie fsm\Abstract\Extensions.cs" />
      <Compile Include="Assets\Scripts\Librairie fsm\Abstract\Fsm.cs" />
      <Compile Include="Assets\Scripts\Librairie fsm\Abstract\FsmStandard.cs" />
@@ -133,6 +135,7 @@
      <Compile Include="Assets\Scripts\Oscar\StateMeteor.cs" />
      <Compile Include="Assets\Scripts\Oscar\StateProjectile.cs" />
      <None Include="Assets\Ferr\2DTerrain\Shaders\UnlitColoredTint.shader" />
+     <None Include="Assets\Scripts\EnemyStarterKit\$ReadMe.txt" />
      <None Include="Assets\Ferr\Common\Data\cache.txt" />
      <None Include="Assets\Ferr\2DTerrain\Shaders\UnitColoredTransparent.shader" />
      <None Include="Assets\Ferr\Common\Shaders\UnlitVertexColorTransparent.shader" />

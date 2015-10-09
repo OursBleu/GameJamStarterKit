@@ -8,7 +8,7 @@ public abstract class State
     private Fsm _fsm;
     public Fsm Fsm { get { return _fsm; } set { _fsm = value; } }
 
-    private float _stateDuration;
+    private float _stateDuration = 0f;
     protected float StateDuration { get { return _stateDuration; } set { _stateDuration = value; } }
     public bool IsOver { get { return Fsm.ElapsedTime >= _stateDuration; } }
 
