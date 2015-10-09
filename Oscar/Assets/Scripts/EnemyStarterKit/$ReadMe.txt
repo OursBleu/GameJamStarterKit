@@ -13,3 +13,5 @@ Voici les étapes à suivre pour créer un personnage :
 7) Enregistrer le gameObject en tant que prefab dans le dossier <NomDuPersonnage> créé à l'étape 1
 8) C'est fini, le personnage est prêt à bouger, réfléchir et utiliser ses pouvoirs dans un niveau
 9) Remercier Marc pour cet magnifique présent. :]
+
+=====================================
