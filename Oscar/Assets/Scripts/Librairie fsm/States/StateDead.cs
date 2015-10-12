@@ -3,15 +3,11 @@ using System.Collections;
 
 public class StateDead : State
 {
-    bool _isDestroyedByDeath;
-
     SpriteRenderer _renderer;
 
-    public StateDead(Fsm fsm, bool isDestroyedByDeath = false) : base(fsm)
+    public StateDead(Fsm fsm) : base(fsm)
     {
         _renderer = Fsm.GetComponent<SpriteRenderer>();
-
-        _isDestroyedByDeath = isDestroyedByDeath;
     }
 
     public override void StateEnter()
@@ -28,16 +24,9 @@ public class StateDead : State
 
     public override void StateExit()
     {
-        if (!_isDestroyedByDeath)
-        {
-            _renderer.sortingOrder = 1;
-            _renderer.color = Color.Lerp(Color.white, Color.black, 0f);
-            Fsm.gameObject.layer = LayerMask.NameToLayer("Entity");
-        }
-        else
-        {
-            Fsm.Destroy(Fsm.gameObject);
-        }
+        _renderer.sortingOrder = 1;
+        _renderer.color = Color.Lerp(Color.white, Color.black, 0f);
+        Fsm.gameObject.layer = LayerMask.NameToLayer("Entity");
     }
-   
+
 }

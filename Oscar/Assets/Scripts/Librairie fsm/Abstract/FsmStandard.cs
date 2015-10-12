@@ -52,8 +52,8 @@ public class FsmStandard : Fsm
         AddTransition(jumping, falling, () => { return CurrentState.IsOver; });
         AddTransition(falling, moving, () => { return _ground.IsGrounded; });
         AddTransition(hit, dead, () => { return CurrentState.IsOver && _health.IsEmpty; });
-        AddTransition(hit, moving, () => { return CurrentState.IsOver; });
-        AddTransition(dead, moving, () => { return !_health.IsEmpty; });
+        AddTransition(hit, falling, () => { return CurrentState.IsOver; });
+        AddTransition(dead, falling, () => { return !_health.IsEmpty; });
     }
 
 }

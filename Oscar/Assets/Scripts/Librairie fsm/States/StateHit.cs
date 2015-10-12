@@ -21,7 +21,7 @@ public class StateHit : State
     public override void StateEnter()
     {
         _health.Value -= _collision.LastCollidedObject.GetComponent<ManagerCollision>().Damages;
-        _knockbackDirection = Vector2.up; // -_locomotion.LastDirection;
+        _knockbackDirection = (Fsm.transform.position - _collision.LastCollidedObject.position).normalized.x * Vector2.right + 3 * Vector2.up; // -_locomotion.LastDirection;
         _locomotion.Move(_knockbackDirection, _knockbackSpeed);
     }
 

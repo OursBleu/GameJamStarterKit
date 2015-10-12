@@ -134,6 +134,8 @@
      <Compile Include="Assets\Scripts\Oscar\InstantiableFireball.cs" />
      <Compile Include="Assets\Scripts\Oscar\ManagerInputPlayer.cs" />
      <Compile Include="Assets\Scripts\Oscar\StateProjectile.cs" />
+     <Compile Include="Assets\Scripts\Sangleau\FSM_Sangleau.cs" />
+     <Compile Include="Assets\Scripts\Sangleau\Manager_Sangleau.cs" />
      <None Include="Assets\Ferr\2DTerrain\Shaders\UnlitColoredTint.shader" />
      <None Include="Assets\Scripts\EnemyStarterKit\$ReadMe.txt" />
      <None Include="Assets\Ferr\Common\Data\cache.txt" />

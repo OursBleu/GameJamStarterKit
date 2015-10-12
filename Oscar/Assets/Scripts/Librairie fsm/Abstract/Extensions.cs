@@ -44,8 +44,10 @@ public static class Extensions
         return new Color(color.r, color.g, color.b, alpha);
     }
 
-    public static void DestroyIfOutOfScreen(this GameObject gameObject, float screenWidth, float screenHeight, float multiplicator = 0f)
+    public static void DestroyIfOutOfScreen(this GameObject gameObject, float multiplicator = 0f)
     {
+        float screenWidth = Screen.width;
+        float screenHeight = Screen.height;
         Vector3 screenPos = Camera.main.WorldToScreenPoint(gameObject.transform.position);
         if (screenPos.x < -screenWidth * multiplicator || screenPos.x > screenWidth * (1f + multiplicator) ||
             screenPos.y < -screenHeight * multiplicator || screenPos.y > screenHeight * (1f + multiplicator)) MonoBehaviour.Destroy(gameObject);

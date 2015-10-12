@@ -13,21 +13,19 @@ public class FSM_Sangleau : FsmStandard
 {
     protected override void Awake()
     {
-        base.Awake();
         _input = gameObject.GetOrAdd<Manager_Sangleau>();
-
 
         base.Awake();
 
         //Team : enemy ==> 1
         _collision.TeamIndex = 1;
+        _collision.Damages = 1;
 
         //Vie : 2 PV
         _health.Init(2);
 
         // On fixe la vitesse et la hauteur du saut.
         _locomotion.Init(120f, 80f);
-
 
 
     }

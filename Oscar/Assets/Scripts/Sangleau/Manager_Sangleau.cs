@@ -11,31 +11,27 @@ using System.Collections;
 */
 public class Manager_Sangleau : Manager, IManagerInput
 {
+
     Transform playerTransform;
 
     //range of détection
     private float _range = 10f;
+
     void Start()
     {
         playerTransform = GameObject.FindGameObjectWithTag("Player").transform;
     }
-    void Update()
-    {
-        //Si le joueur est à portée de détection, se diriger vers lui, sinon ne pas bouger
-        if (distPlayer() < _range)
-        {
-            _direction = dirPlayer();
-        }
-        else _direction = Vector2.zero;
 
-    }
-
-    private Vector2 _direction= Vector2.zero;
     public Vector2 Direction
     {
         get
         {
-            return _direction;
+            //Si le joueur est à portée de détection, se diriger vers lui, sinon ne pas bouger
+            if (distPlayer() < _range)
+            {
+                return dirPlayer();
+            }
+            else return Vector2.zero;
         }
     }
 
