@@ -3,56 +3,35 @@ using System.Collections;
 
 public class StateProjectile : State
 {
-    protected float _shotSpeed;
+    // L'angle du tir
+    protected float _shotAngle;
+
+    // La distance entre le centre du tireur et le spawn du projectile
     protected Vector2 _shotOffset;
+
+    // Le prefab a partir duquel on va instancier le projectile
     private GameObject _projectilePrefab;
 
-    protected ManagerCollision _collision;
-
-    public StateProjectile(Fsm fsm) : base(fsm)
+    public StateProjectile(Fsm fsm, string prefabPath, float angle, float duration) : base(fsm)
     {
-        StateDuration = 0.25f;
-        _shotSpeed = 300f;
-        _shotOffset = 3f * Vector2.right;
-        _projectilePrefab = Resources.Load<GameObject>("Objects/Fireball");
+        StateDuration = duration;
 
-        _collision = Fsm.gameObject.GetOrAdd<ManagerCollision>();
+        _shotAngle = angle;
+        _shotOffset = (Quaternion.Euler(0f, 0f, _shotAngle) * (3f * Vector2.right));
+        _projectilePrefab = Resources.Load<GameObject>(prefabPath);
     }
 
     public override void StateEnter()
     {
         Vector2 direction = new Vector2(Fsm.transform.localScale.normalized.x, 0f);
-        Vector3 shotOffset = (_shotOffset.AsVector3() * direction.x); shotOffset.y = -Mathf.Abs(shotOffset.y);
-        GameObject go = Fsm.Instantiate(_projectilePrefab, Fsm.transform.position + shotOffset, Quaternion.identity) as GameObject;
+        Vector3 shotOffsetAccountingDirection = (_shotOffset.AsVector3() * direction.x);
+        shotOffsetAccountingDirection.y = -Mathf.Abs(shotOffsetAccountingDirection.y);
 
-        InstantiableProjectile projectile = go.GetComponent<InstantiableProjectile>();
-        projectile.Locomotion.DefaultSpeed = _shotSpeed;
-        projectile.Collision.TeamIndex = _collision.TeamIndex;
-        projectile.Collision.Damages = 1;
-
-        SetupProjectile(projectile);
-        SetupParticles(projectile);
-    }
-
-    public override void StateUpdate()
-    {
-        
-    }
-
-    public override void StateExit()
-    {
-
-    }
-
-    protected virtual void SetupProjectile(InstantiableProjectile projectile)
-    {
-        projectile.Locomotion.DefaultDirection = new Vector2(Fsm.transform.localScale.normalized.x, 0f);
-        //projectile.transform.SetScaleX(Mathf.Sign(Fsm.transform.localScale.x) * projectile.transform.localScale.x);   
-    }
-
-    protected virtual void SetupParticles(InstantiableProjectile projectile)
-    {
-        Grid.particleSystem.Play("ball", projectile.transform, projectile.Locomotion.DefaultDirection, true);
+        InstantiableFireball projectile = Fsm.Instantiate(_projectilePrefab).GetComponent<InstantiableFireball>();
+        projectile.Launcher = Fsm.gameObject;
+        projectile.transform.position = Fsm.transform.position + shotOffsetAccountingDirection;
+        projectile.transform.rotation = Quaternion.identity;
+        projectile.transform.right = Quaternion.Euler(0f, 0f, -direction.x * _shotAngle) * direction;
     }
    
 }

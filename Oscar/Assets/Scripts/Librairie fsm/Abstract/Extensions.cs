@@ -51,6 +51,16 @@ public static class Extensions
             screenPos.y < -screenHeight * multiplicator || screenPos.y > screenHeight * (1f + multiplicator)) MonoBehaviour.Destroy(gameObject);
     }
 
+    public static bool IsOutOfScreen(this Transform transform, float multiplicator = 0f)
+    {
+        Vector3 screenPos = Camera.main.WorldToScreenPoint(transform.position);
+        float screenWidth = Screen.width;
+        float screenHeight = Screen.height;
+        if (screenPos.x < -screenWidth * multiplicator || screenPos.x > screenWidth * (1f + multiplicator) ||
+            screenPos.y < -screenHeight * multiplicator || screenPos.y > screenHeight * (1f + multiplicator)) return true;
+        else return false;
+    }
+
     public static Vector3 SetScaleX(this Transform transform, float x)
     {
         Vector3 scale = transform.localScale;

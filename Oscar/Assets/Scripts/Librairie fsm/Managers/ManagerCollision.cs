@@ -3,22 +3,28 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 
-public class ManagerCollision : Manager, IDisableable
+public class ManagerCollision : Manager
 {
-    #region Attributes_and_Properties
-
+    // L'équipe de l'objet, les membres d'une même équipe ne peuvent pas s'infliger de dégâts
+    // 0 : le héros, ses alliés et toutes leurs attaques
+    // 1 : les pièges du décor, les monstres et toutes leurs attaques 
+    //-1 : les objets qui ne peuvent pas recevoir de dégâts
     private int _teamIndex = -1;
-    public int TeamIndex { get { return (_isEnabled ? _teamIndex : -1); } set { _teamIndex = value; } }
+    public int TeamIndex { get { return _teamIndex; } set { _teamIndex = value; } }
 
-    private bool _isColliding = false;
-    public bool IsColliding { get { return _isColliding; } }
-
-    private Transform _lastCollidedObject = null;
-    public Transform LastCollidedObject { get { return _lastCollidedObject; } }
-
+    // Les dégâts que l'utilisateur fait à un objet portant aussi se script
     private int _damages;
     public int Damages { get { return _damages; } set { _damages = value; } }
 
+    // Si oui ou non l'utilisateur est en contact avec un autre objet
+    private bool _isColliding = false;
+    public bool IsColliding { get { return _isColliding; } }
+
+    // Le dernier objet avec lequel l'utilisateur est rentré en contact
+    private Transform _lastCollidedObject = null;
+    public Transform LastCollidedObject { get { return _lastCollidedObject; } }
+
+    // Si oui ou non le dernier objet que l'utilisateur a touché possède aussi ce manager
     public bool HasOtherACollisionManager
     {
         get
@@ -29,6 +35,7 @@ public class ManagerCollision : Manager, IDisableable
         }
     }
 
+    // Si oui ou non l'objet touché est dans une équipe adverse (on considère toujours qu'un objet de l'équipe -1 est dans son équipe)
     public bool IsOtherInDifferentTeam
     {
         get
@@ -40,42 +47,23 @@ public class ManagerCollision : Manager, IDisableable
         }
     }
 
+    // Le point ou la collision à eu lieu
     private Vector2 _impact = Vector3.forward;
     public Vector2 Impact { get { return _impact; } }
 
-    bool _isOtherOwnCollider = true;
-    public bool IsOtherOwnCollider { get { return _isOtherOwnCollider; } }
-
-    private bool _isEnabled = true;
-    public bool IsEnabled
-    {
-        get
-        {
-            return _isEnabled;
-        }
-        set
-        {
-            _isEnabled = false;
-        }
-    }
-
-    #endregion
-
     public Vector2 NullPosition { get { return Vector2.zero; } }
 
-    void StartCollision(GameObject other)
+    private void StartCollision(GameObject other)
     {
         _isColliding = true;
         _lastCollidedObject = other.transform;
-        _isOtherOwnCollider = true;
         _impact = NullPosition;
     }
 
-    public void EndCollision()
+    private void EndCollision()
     {
         _isColliding = false;
         _lastCollidedObject = null;
-        _isOtherOwnCollider = true;
         _impact = NullPosition;
     }
 
@@ -93,7 +81,6 @@ public class ManagerCollision : Manager, IDisableable
 
         targetCollisionManager._isColliding = true;
         targetCollisionManager._lastCollidedObject = source;
-        targetCollisionManager._isOtherOwnCollider = false;
 
         if (directionOrPosition) targetCollisionManager._impact = impactInfos;
         else targetCollisionManager._impact = target.position - impactInfos;
@@ -124,7 +111,6 @@ public class ManagerCollision : Manager, IDisableable
         res += "Team " + TeamIndex;
         if (LastCollidedObject != null)
         {
-            res += " => " + (IsOtherOwnCollider ? "body" : "skill");
             res += " of " + LastCollidedObject.gameObject.name;
             res += " from " + (IsOtherInDifferentTeam ? "a different" : "the same") + " Team ";
         }

@@ -34,7 +34,7 @@ public class FsmStandard : Fsm
 
     private void AddStates()
     {
-        moving = AddState(new StateMoving(this));
+        moving = AddState(new StateMovingCurvedGround(this));
         jumping = AddState(new StateJumping(this));
         falling = AddState(new StateFalling(this));
         hit = AddState(new StateHit(this));

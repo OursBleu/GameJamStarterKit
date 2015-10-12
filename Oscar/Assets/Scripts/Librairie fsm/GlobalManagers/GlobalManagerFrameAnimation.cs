@@ -10,7 +10,7 @@ public class AnimationStruct
     public Coroutine _coroutine;
 }
 
-public class GlobalManagerFrameAnimation : MonoBehaviour
+public class GlobalManagerFrameAnimation : GlobalManager
 {
     Dictionary<SpriteRenderer, AnimationStruct> _animations;
 

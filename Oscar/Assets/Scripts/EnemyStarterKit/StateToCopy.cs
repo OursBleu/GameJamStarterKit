@@ -7,18 +7,18 @@ using System.Collections;
 public class StateToCopy : State
 {
     // On liste ici tout les managers et composants qui vont nous servir dans cet état
-    ManagerLocomotion _locomotion;
-    IManagerInput _input;
+    //ManagerLocomotion _locomotion;
+    //IManagerInput _input;
 
     // Le constructeur de l'état, appelé seulement une fois : au moment où on utilise AddState dans la fsm.
     // Utile pour référencer les manager ou des composants, et fixer la durée de l'état
     public StateToCopy(Fsm fsm) : base(fsm)
     {
         // GetOrAdd permet d'ajouter un composant s'il n'est pas déjà attaché, dans tous les cas il retourne le composant.
-        _input = Fsm.gameObject.GetComponent<IManagerInput>();
+        //_input = Fsm.gameObject.GetComponent<IManagerInput>();
 
         // Par contre on ne peut par ajouter une interface comme composant, dans ce cas on doit utiliser GetComponent.
-        _locomotion = Fsm.gameObject.GetOrAdd<ManagerLocomotion>();
+        //_locomotion = Fsm.gameObject.GetOrAdd<ManagerLocomotion>();
 
         // StateDuration représente la durée de l'état, la propriété IsOver vaudra true quand cette durée sera écoulée.
         // Cette propriété sert principalement pour écrire des transitions dans la fsm : pour sortir de l'état quand il est achevé.

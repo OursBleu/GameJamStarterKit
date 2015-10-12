@@ -2,7 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 
-public class GlobalManagerParticles : MonoBehaviour
+public class GlobalManagerParticles : GlobalManager
 {
 
     private string _particlePath = "Particles/";

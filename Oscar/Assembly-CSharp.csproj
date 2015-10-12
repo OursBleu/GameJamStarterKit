@@ -111,10 +111,10 @@
      <Compile Include="Assets\Scripts\Librairie fsm\Abstract\Extensions.cs" />
      <Compile Include="Assets\Scripts\Librairie fsm\Abstract\Fsm.cs" />
      <Compile Include="Assets\Scripts\Librairie fsm\Abstract\FsmStandard.cs" />
+     <Compile Include="Assets\Scripts\Librairie fsm\Abstract\GlobalManager.cs" />
      <Compile Include="Assets\Scripts\Librairie fsm\Abstract\IDisableable.cs" />
      <Compile Include="Assets\Scripts\Librairie fsm\Abstract\IManagerInput.cs" />
      <Compile Include="Assets\Scripts\Librairie fsm\Abstract\Instantiable.cs" />
-     <Compile Include="Assets\Scripts\Librairie fsm\Abstract\InstantiableProjectile.cs" />
      <Compile Include="Assets\Scripts\Librairie fsm\Abstract\Manager.cs" />
      <Compile Include="Assets\Scripts\Librairie fsm\Abstract\State.cs" />
      <Compile Include="Assets\Scripts\Librairie fsm\GlobalManagers\GlobalManagerFrameAnimation.cs" />
@@ -129,10 +129,10 @@
      <Compile Include="Assets\Scripts\Librairie fsm\States\StateFalling.cs" />
      <Compile Include="Assets\Scripts\Librairie fsm\States\StateHit.cs" />
      <Compile Include="Assets\Scripts\Librairie fsm\States\StateJumping.cs" />
-     <Compile Include="Assets\Scripts\Librairie fsm\States\StateMoving.cs" />
+     <Compile Include="Assets\Scripts\Librairie fsm\States\StateMovingCurvedGround.cs" />
      <Compile Include="Assets\Scripts\Oscar\FsmOscar.cs" />
+     <Compile Include="Assets\Scripts\Oscar\InstantiableFireball.cs" />
      <Compile Include="Assets\Scripts\Oscar\ManagerInputPlayer.cs" />
-     <Compile Include="Assets\Scripts\Oscar\StateMeteor.cs" />
      <Compile Include="Assets\Scripts\Oscar\StateProjectile.cs" />
      <None Include="Assets\Ferr\2DTerrain\Shaders\UnlitColoredTint.shader" />
      <None Include="Assets\Scripts\EnemyStarterKit\$ReadMe.txt" />
