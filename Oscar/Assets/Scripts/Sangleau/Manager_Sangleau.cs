@@ -15,6 +15,7 @@ public class Manager_Sangleau : Manager, IManagerInput
     Transform playerTransform;
     Transform _gauche;
     Transform _droite;
+    GameObject _myAlpha;
 
 
     //range of détection
@@ -28,6 +29,9 @@ public class Manager_Sangleau : Manager, IManagerInput
         _gauche = GetComponent<FSM_Sangleau>().baliseGauche.transform;
         _droite = GetComponent<FSM_Sangleau>().baliseDroite.transform;
 
+        //detection du mâle alpha
+        _myAlpha = GetComponent<FSM_Sangleau>().alpha;
+
         playerTransform = GameObject.FindGameObjectWithTag("Player").transform;
 
         FindNewTarget();
@@ -38,13 +42,16 @@ public class Manager_Sangleau : Manager, IManagerInput
     {
         get
         {
-            //Si le joueur est à portée de détection, se diriger vers lui, sinon ne pas bouger
+            
+            
             if (playerInRange())
             {
                 return dirPlayer();
             }
             else
             {
+                //RaycastHit2D hit = Physics2D.Raycast(transform.position, Vector2.right * transform.localScale.x, 2f, 1<<LayerMask.NameToLayer("Ground"));
+                //if (hit) FindNewTarget();
                 //Debug.Log("t: " + _target.ToString());
                 //Debug.Log("i: " + _idleDuration);
                 if ((transform.position.AsVector2()-_target).magnitude<=0.25f)
@@ -61,10 +68,21 @@ public class Manager_Sangleau : Manager, IManagerInput
     }
     void FindNewTarget()
     {
-        //Debug.Log("New target !");
+        _idleDuration = Random.value * 5 + 1; //Entre 1 et 6 secondes d'idle
+        if (!_myAlpha)
+        {
+
+        
         //position aléatoire entre les deux balises
         _target = (Random.value * (_droite.position - _gauche.position) + _gauche.position).AsVector2();
-        _idleDuration = Random.value * 5 +1; //Entre 1 et 6 secondes d'idle
+        
+        }
+        else
+        {
+            //s'il y a un mâle alpha, on choisit une cible proche du mâle alpha
+            _target = (8 * _myAlpha.GetComponent<Manager_Sangleau>()._target + 2 * (Random.value * (_droite.position - _gauche.position) + _gauche.position).AsVector2()) / 10;
+
+        }
     }
 
   
@@ -110,8 +128,8 @@ public class Manager_Sangleau : Manager, IManagerInput
         bool rangeOK = (distPlayer() < _range);
         float angle = Vector3.Angle(dirPlayer(), Vector3.right*transform.localScale.x);
         bool isFacing = angle > -80 && angle < 80;
-        Debug.DrawLine(transform.position, playerTransform.position);
-        Debug.Log(angle+" "+isFacing);
+        //Debug.DrawLine(transform.position, playerTransform.position);
+        //Debug.Log(angle+" "+isFacing);
         result = rangeOK && visible && isFacing;
         return result;
     }

@@ -15,6 +15,9 @@ public class FSM_Sangleau : FsmStandard
     public GameObject baliseGauche;
     public GameObject baliseDroite;
 
+    //Le mâle alpha 
+    public GameObject alpha;
+
     protected override void Awake()
     {
         _input = gameObject.GetOrAdd<Manager_Sangleau>();
