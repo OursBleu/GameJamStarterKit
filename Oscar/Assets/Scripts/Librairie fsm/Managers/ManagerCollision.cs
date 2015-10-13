@@ -95,7 +95,7 @@ public class ManagerCollision : Manager
     }
 
     void OnCollisionEnter2D(Collision2D collision) { StartCollision(collision.gameObject); }
-    void OnCollisionStay2D(Collider2D collider) { StartCollision(collider.gameObject); }
+    void OnCollisionStay2D(Collision2D collision) { StartCollision(collision.gameObject); }
     void OnCollisionExit2D(Collision2D collision) { EndCollision(); }
     void OnTriggerEnter2D(Collider2D collider) { StartCollision(collider.gameObject); }
     void OnTriggerStay2D(Collider2D collider) { StartCollision(collider.gameObject); }
