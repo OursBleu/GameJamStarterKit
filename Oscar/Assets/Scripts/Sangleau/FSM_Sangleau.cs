@@ -2,12 +2,12 @@
 using System.Collections;
 /*
     Nom : FSM Sangleau
-    Version : 0.1
+    Version : 0.2
     Créé par : Erwan Giry-Fouquet
     Description : 
     | FSM permettant à un sangleau de se déplacer vers le joueur, de le mordre,
     | et se de se repérer dans l'environnement en fonction du Manager_Sangleau
-    Status : OK
+    Status : OK, à mettre à jour quand marc modifiera le système des colliders (2D => 3D)
 */
 public class FSM_Sangleau : FsmStandard
 {

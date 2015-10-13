@@ -2,12 +2,12 @@
 using System.Collections;
 /*
     Nom : Manager Sangleau
-    Version : 0.1
+    Version : 0.2
     Créé par : Erwan Giry-Fouquet
     Description : 
     | IA (Manager) permettant à un sangleau de se déplacer vers le joueur, de le mordre,
     | et se de se repérer dans l'environnement
-    Status : OK
+    Status : OK, à mettre à jour quand marc modifiera le système des colliders (2D => 3D)
 */
 public class Manager_Sangleau : Manager, IManagerInput
 {
