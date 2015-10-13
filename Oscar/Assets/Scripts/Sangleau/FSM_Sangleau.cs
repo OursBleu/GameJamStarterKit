@@ -11,6 +11,10 @@ using System.Collections;
 */
 public class FSM_Sangleau : FsmStandard
 {
+    //Les balises délimitant la zone de repos du Sangleau
+    public GameObject baliseGauche;
+    public GameObject baliseDroite;
+
     protected override void Awake()
     {
         _input = gameObject.GetOrAdd<Manager_Sangleau>();
@@ -25,7 +29,7 @@ public class FSM_Sangleau : FsmStandard
         _health.Init(2);
 
         // On fixe la vitesse et la hauteur du saut.
-        _locomotion.Init(120f, 80f);
+        _locomotion.Init(110f, 80f);
 
 
     }
