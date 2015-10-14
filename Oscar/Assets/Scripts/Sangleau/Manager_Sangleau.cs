@@ -2,11 +2,15 @@
 using System.Collections;
 /*
     Nom : Manager Sangleau
-    Version : 0.2
+    Version : 0.3
     Créé par : Erwan Giry-Fouquet
     Description : 
     | IA (Manager) permettant à un sangleau de se déplacer vers le joueur, de le mordre,
-    | et se de se repérer dans l'environnement
+    | et se de se repérer dans l'environnement. 
+    | L'IA dispose de deux portée de detection, et de deux états : Idle et Hunting
+    | En idle, l'IA se balade, en hunting, elle a une portée plus grande, n'a pas besoin
+    | de voir sa cible, et cours très vite.
+    | On peut désigner un alpha, qui influence les autres Sangleaux dans leurs déplacements par défaut.
     Status : OK, à mettre à jour quand marc modifiera le système des colliders (2D => 3D)
 */
 public class Manager_Sangleau : Manager, IManagerInput
@@ -17,9 +21,15 @@ public class Manager_Sangleau : Manager, IManagerInput
     Transform _droite;
     GameObject _myAlpha;
 
+    enum Status
+    {
+        Idle, Hunting
+    }
+    Status myStatus = Status.Idle;
 
     //range of détection
     private float _range = 10f;
+    private float _huntRange = 18f;
     private float _idleSpeedFactor = 0.4f;
 
     
@@ -44,8 +54,10 @@ public class Manager_Sangleau : Manager, IManagerInput
     {
         get
         {
-            
-            
+            Debug.DrawLine(transform.position, transform.position + dirPlayer().AsVector3() * _huntRange);
+            Debug.DrawLine(transform.position, transform.position + dirPlayer().AsVector3() * _range, Color.green);
+
+
             if (playerInRange())
             {
                 return dirPlayer();
@@ -118,28 +130,37 @@ public class Manager_Sangleau : Manager, IManagerInput
     bool playerInRange()
     {
         bool result = false;
-        //3D A implémenter plus tard
-        /*RaycastHit hit;
-        if (Physics.Raycast(transform.position, dirPlayer(),  out hit, 1 << LayerMask.NameToLayer("entities")))
+
+        bool inHuntRange = (distPlayer() < _huntRange);
+        bool inRange = (distPlayer() < _range);
+        bool visible = false;
+        bool rangeOK = false;
+        float angle = 0f;
+        bool isFacing = false;
+        //Detecté !
+        if (inRange || inHuntRange&&myStatus==Status.Hunting)
         {
-            if (hit.collider.gameObject.tag == "Player")
-            {
-                print("FOUNDED");
-            }
-            print("FOUNDED");
+            myStatus = Status.Hunting;
+            //On check s'il y a une ligne de vision
+            RaycastHit2D hit = Physics2D.Linecast(transform.position, playerTransform.position);
+            visible = hit.transform == playerTransform;
+            rangeOK = (distPlayer() < _range);
+            angle = Vector3.Angle(dirPlayer(), Vector3.right * transform.localScale.x);
+            isFacing = angle > -90 && angle < 90;
+            //Debug.DrawLine(transform.position, playerTransform.position);
+            //Debug.Log(angle+" "+isFacing);
         }
-        */
-        if (distPlayer() < _range) {
-        //On check s'il y a une ligne de vision
-        RaycastHit2D hit = Physics2D.Linecast(transform.position, playerTransform.position);
-        bool visible = hit.transform == playerTransform;
-        bool rangeOK = (distPlayer() < _range);
-        float angle = Vector3.Angle(dirPlayer(), Vector3.right * transform.localScale.x);
-        bool isFacing = angle > -90 && angle < 90;
-        //Debug.DrawLine(transform.position, playerTransform.position);
-        //Debug.Log(angle+" "+isFacing);
-        result = rangeOK && visible && isFacing;
-    }
+        else
+        {
+            myStatus = Status.Idle;
+        }
+        
+        result = ( rangeOK  && isFacing && visible  ) || ( myStatus == Status.Hunting && inHuntRange )  ;
+    
+
+        
+
+        
         return result;
     }
     Vector2 vectPlayer()

@@ -2,7 +2,7 @@
 using System.Collections;
 /*
     Nom : FSM Sangleau
-    Version : 0.2
+    Version : 0.3
     Créé par : Erwan Giry-Fouquet
     Description : 
     | FSM permettant à un sangleau de se déplacer vers le joueur, de le mordre,
