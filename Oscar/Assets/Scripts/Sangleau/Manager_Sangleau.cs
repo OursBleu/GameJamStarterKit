@@ -22,13 +22,15 @@ public class Manager_Sangleau : Manager, IManagerInput
     private float _range = 10f;
     private float _idleSpeedFactor = 0.4f;
 
+    
     void Start()
         
     {
+
         //balises de zone de repos
         _gauche = GetComponent<FSM_Sangleau>().baliseGauche.transform;
         _droite = GetComponent<FSM_Sangleau>().baliseDroite.transform;
-
+        
         //detection du mâle alpha
         _myAlpha = GetComponent<FSM_Sangleau>().alpha;
 
@@ -36,7 +38,7 @@ public class Manager_Sangleau : Manager, IManagerInput
 
         FindNewTarget();
     }
-    Vector2 _target = Vector2.zero;
+    Vector2 _target;
     float _idleDuration = 0f;
     public Vector2 Direction
     {
@@ -62,6 +64,8 @@ public class Manager_Sangleau : Manager, IManagerInput
                     }
                     else FindNewTarget();
                 }
+                
+                
                 return (_target-transform.position.AsVector2()).normalized * _idleSpeedFactor;
             }
         }
@@ -69,7 +73,7 @@ public class Manager_Sangleau : Manager, IManagerInput
     void FindNewTarget()
     {
         _idleDuration = Random.value * 5 + 1; //Entre 1 et 6 secondes d'idle
-        if (!_myAlpha)
+        if (!_myAlpha|| _myAlpha.GetComponent<Manager_Sangleau>()._target == Vector2.zero)
         {
 
         
@@ -79,13 +83,16 @@ public class Manager_Sangleau : Manager, IManagerInput
         }
         else
         {
+             
             //s'il y a un mâle alpha, on choisit une cible proche du mâle alpha
             _target = (8 * _myAlpha.GetComponent<Manager_Sangleau>()._target + 2 * (Random.value * (_droite.position - _gauche.position) + _gauche.position).AsVector2()) / 10;
-
+            
         }
+        Debug.Log("g: " + gameObject.name + " t: " + _target.ToString() + " i: " + _idleDuration);
+
     }
 
-  
+
     public bool this[int index]
     {
         get
@@ -110,7 +117,7 @@ public class Manager_Sangleau : Manager, IManagerInput
     }
     bool playerInRange()
     {
-        bool result=false;
+        bool result = false;
         //3D A implémenter plus tard
         /*RaycastHit hit;
         if (Physics.Raycast(transform.position, dirPlayer(),  out hit, 1 << LayerMask.NameToLayer("entities")))
@@ -122,15 +129,17 @@ public class Manager_Sangleau : Manager, IManagerInput
             print("FOUNDED");
         }
         */
+        if (distPlayer() < _range) {
         //On check s'il y a une ligne de vision
         RaycastHit2D hit = Physics2D.Linecast(transform.position, playerTransform.position);
         bool visible = hit.transform == playerTransform;
         bool rangeOK = (distPlayer() < _range);
-        float angle = Vector3.Angle(dirPlayer(), Vector3.right*transform.localScale.x);
-        bool isFacing = angle > -80 && angle < 80;
+        float angle = Vector3.Angle(dirPlayer(), Vector3.right * transform.localScale.x);
+        bool isFacing = angle > -90 && angle < 90;
         //Debug.DrawLine(transform.position, playerTransform.position);
         //Debug.Log(angle+" "+isFacing);
         result = rangeOK && visible && isFacing;
+    }
         return result;
     }
     Vector2 vectPlayer()
